@@ -15,5 +15,5 @@ Para rodar esse jogo você vai precisar ir na pasta onde você baixou/clonou o r
 
 (UNIX/MACOS)
 ```bash
-$ python3 -m pip install requirements.txt
+$ pip install -r requirements.txt
 ```

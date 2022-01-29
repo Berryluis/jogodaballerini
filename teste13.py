@@ -1,6 +1,17 @@
 import math
+from time import sleep
 import pygame
 import pygame.freetype
+import win32api
+import webbrowser
+
+pygame.mixer.init()
+pew = pygame.mixer.Sound('pew.mp3')
+pew.set_volume(0.1)
+hit = pygame.mixer.Sound('hit.mp3')
+hit.set_volume(0.1)
+
+
 pygame.init()
 
 branco = (255,255,255)
@@ -53,6 +64,7 @@ class bulet:
         self.reset = y
 
     def mover(self):
+        pew.play()
         if self.y > 0:
             self.y -= self.sp
         else:
@@ -73,6 +85,14 @@ fonte = pygame.freetype.Font('./comic.ttf', 30)
 rodando = True
 
 while rodando:
+
+    if enemylife <= 0:
+        webbrowser.open('https://www.youtube.com/c/rafaellaballerini/featured')
+        win32api.MessageBox(0,'Você ganhou!','Winning Screen!',16)
+        
+        rodando=False
+
+
     tela.fill(branco)
     plr = Player(x,y,imagem)
 
@@ -106,7 +126,8 @@ while rodando:
     enemycol = enemy.draw()
 
     if bulcol.colliderect(bulcol):
-        enemylife -= 0.1
+        enemylife -= 20
+        hit.play()
 
-
+    
     pygame.display.update()
